@@ -1,0 +1,23 @@
+<h1>I am new recipe</h1>
+
+<%= form_for :recipes do |f| %>
+<p>
+<%= f.label :category_id, "Choose category" %>
+<select name="recipe_categories" >
+<% @categories.each do |category|%>
+    <option value="<%=category['id']%>"><%=category['title']%> </option>
+<%end%>
+</select %>
+</p>
+
+<p>
+<%= f.label :name, "Recipe name" %>
+<%= f.password_field :name %>
+</p>
+
+<p>
+<%= f.label :manual, "Description" %>
+<%= f.text_area :manual, size: "30x10" %>
+</p>
+
+<% end %>
