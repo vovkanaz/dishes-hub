@@ -8,5 +8,12 @@ class RecipesController < ApplicationController
 
   def new
     @categories = Category.all
+    @recipe = Recipe.new
   end
+
+  def create
+  #   @categories = Category.new(params.require(:categories).permit(:title))
+  #   @categories.save
+  #   redirect_to @categories
+   end
 end

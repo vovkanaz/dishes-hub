@@ -1,8 +1,8 @@
-<h1>I am new recipe</h1>
+<h1>Create a recipe</h1>
 
-<%= form_for :recipes do |f| %>
+<%= form_for @recipe, html: {id: "recipes"} do |f| %>
 <p>
-<%= f.label :category_id, "Choose category" %>
+<%= label_tag(:category_id, "Recipe name") %>
 <select name="recipe_categories" >
 <% @categories.each do |category|%>
     <option value="<%=category['id']%>"><%=category['title']%> </option>
@@ -10,14 +10,29 @@
 </select %>
 </p>
 
-<p>
-<%= f.label :name, "Recipe name" %>
-<%= f.password_field :name %>
-</p>
+<%= label_tag(:name, "Recipe name") %>
+<%= text_field_tag(:name) %>
 
-<p>
-<%= f.label :manual, "Description" %>
-<%= f.text_area :manual, size: "30x10" %>
-</p>
+<p><%= f.text_field :ingredients %><button id="test" type="button">Add Ingredient!</button></p>
+<p id="list"></p>
 
+<%= submit_tag("Add Recipe", id: "add") %>
 <% end %>
+
+<script type='text/javascript'>
+// $('#test').on('click',function(){
+//   var value = $('#ingredients').val();
+//   var input = "<input type='text' name='ingredients' id='ingredients' type='hidden' value="+value+" />"
+//     $('#list').append(input).val(value);
+//   })
+
+$('#test').on('click',function(){
+  var as = $('#recipe_ingredients').val();
+  $('<input>').attr({
+    id: 'ingredients',
+    value: as,
+    name: 'ingredients[]'
+}).appendTo('#recipes');
+});
+
+</script>
