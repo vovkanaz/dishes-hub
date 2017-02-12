@@ -12,8 +12,13 @@ class RecipesController < ApplicationController
   end
 
   def create
-  #   @categories = Category.new(params.require(:categories).permit(:title))
-  #   @categories.save
-  #   redirect_to @categories
+     render plain: params[:recipes].inspect
+  #      @recipes = Recipe.new(params.require(:recipes).permit(:category_id, :name, :ingredients, :manual))
+  #      @recipes.save
+  #     redirect_to @recipes
+  end
+
+   def published_post
+      Time.now
    end
 end

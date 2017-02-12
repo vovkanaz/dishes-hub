@@ -13,3 +13,11 @@
  *= require_tree .
  *= require_self
  */
+@import "materialize";
+label {
+    font-size: 1.2rem;
+}
+
+textarea {
+    height: 16rem
+}

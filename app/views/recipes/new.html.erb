@@ -1,6 +1,7 @@
 <h1>Create a recipe</h1>
-
-<%= form_for @recipe, html: {id: "recipes"} do |f| %>
+<div class="row">
+     <div class="col s12">
+<%= form_for :recipes, url: recipes_path, html: { id: "recipes"} do |f| %>
 <p>
 <%= label_tag(:category_id, "Recipe name") %>
 <select name="recipe_categories" >
@@ -10,29 +11,48 @@
 </select %>
 </p>
 
-<%= label_tag(:name, "Recipe name") %>
-<%= text_field_tag(:name) %>
+<%= f.label :name %><br>
+<%= f.text_field :name %>
+<p>
+<%= f.label :ingredients %><br>
+<%= f.text_field :ingredients %><button id="test" type="button">Add Ingredient!</button></p>
 
-<p><%= f.text_field :ingredients %><button id="test" type="button">Add Ingredient!</button></p>
-<p id="list"></p>
+<p>
 
-<%= submit_tag("Add Recipe", id: "add") %>
+  <%= f.label :manual %><br>
+  <%= f.text_area :manual,  cols: 100, rows: 100 %>
+</p>
+
+<p>
+  <%= f.label :image_url %><br>
+  <%= f.text_field :image_url %>
+</p>
+
+<p>
+  <%= f.label :youtube_url %><br>
+  <%= f.text_field :youtube_url %>
+</p>
+
+<p>
+  <%= f.label :published_at %><br>
+  <%= f.text_field :published_at %>
+</p>
+<p>
+<%= f.submit "Add Recipe",id: "arr" %>
+</p>
 <% end %>
-
-<script type='text/javascript'>
-// $('#test').on('click',function(){
-//   var value = $('#ingredients').val();
-//   var input = "<input type='text' name='ingredients' id='ingredients' type='hidden' value="+value+" />"
-//     $('#list').append(input).val(value);
-//   })
-
+</div>
+</div>
+<script type="text/javascript">
 $('#test').on('click',function(){
-  var as = $('#recipe_ingredients').val();
-  $('<input>').attr({
-    id: 'ingredients',
-    value: as,
-    name: 'ingredients[]'
-}).appendTo('#recipes');
+var as = $('#recipes_ingredients').val();
+input = jQuery("<input type='text'  name='recipes[ingredients]' value="+as+" id='recipes_ingredients'>");
+jQuery('#recipes').append(input);
 });
 
+$('#arr').on('click',function(){
+  var values = $("input[name='recipes[ingredients]']")
+              .map(function(){return $(this).val();}).get();
+  alert(values);
+});
 </script>
