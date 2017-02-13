@@ -3,47 +3,29 @@
      <div class="col s12">
 <%= form_for :recipes, url: recipes_path, html: { id: "recipes"} do |f| %>
 <p>
-<%= label_tag(:category_id, "Recipe name") %>
+<%= label_tag(:category_id, "Choose Category") %>
 <select name="recipe_categories" >
 <% @categories.each do |category|%>
     <option value="<%=category['id']%>"><%=category['title']%> </option>
 <%end%>
 </select %>
 </p>
-
+<p>
 <%= f.label :name %><br>
 <%= f.text_field :name %>
-<p>
-<%= f.label :ingredients %><br>
-<%= f.text_field :ingredients %><button id="test" type="button">Add Ingredient!</button></p>
-
-<p>
+</p>
 
   <%= f.label :manual %><br>
   <%= f.text_area :manual,  cols: 100, rows: 100 %>
 </p>
 
 <p>
-  <%= f.label :image_url %><br>
-  <%= f.text_field :image_url %>
-</p>
-
-<p>
-  <%= f.label :youtube_url %><br>
-  <%= f.text_field :youtube_url %>
-</p>
-
-<p>
-  <%= f.label :published_at %><br>
-  <%= f.text_field :published_at %>
-</p>
-<p>
 <%= f.submit "Add Recipe",id: "arr" %>
 </p>
 <% end %>
 </div>
 </div>
-<script type="text/javascript">
+<!-- <script type="text/javascript">
 $('#test').on('click',function(){
 var as = $('#recipes_ingredients').val();
 input = jQuery("<input type='text'  name='recipes[ingredients]' value="+as+" id='recipes_ingredients'>");
@@ -55,4 +37,9 @@ $('#arr').on('click',function(){
               .map(function(){return $(this).val();}).get();
   alert(values);
 });
+</script> -->
+<script>
+    $(document).ready(function() {
+        $('select').material_select();
+    });
 </script>
