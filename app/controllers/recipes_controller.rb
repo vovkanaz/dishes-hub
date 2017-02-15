@@ -1,6 +1,6 @@
 class RecipesController < ApplicationController
 
-    before_filter :authenticate_user!, except: [:show, :index]
+    before_action :authenticate_user!, except: [:show, :index]
 
   def index
     @recipes = Recipe.all
@@ -11,17 +11,24 @@ class RecipesController < ApplicationController
 
   def new
     @categories = Category.all
-    @recipe = Recipe.new
-  end
+    @recipe = current_user.recipes.build
+   end
 
   def create
-     render plain: params[:recipes].inspect
-  #      @recipes = Recipe.new(params.require(:recipes).permit(:category_id, :name, :ingredients, :manual))
-  #      @recipes.save
-  #     redirect_to @recipes
+    byebug
+     @recipe = current_user.recipes.create(recipe_params.merge({category_id: category_id }))
+     if @recipe.save
+       flash[:notice] = "Successfully created recipe."
+       redirect_to recipe_path(@recipe.id)
+     else
+       render 'new'
+     end
   end
 
-   def published_post
-      Time.now
-   end
+  private
+
+  def recipe_params
+  params.require(:recipes).permit(:recipe_categories, :user_id, :name, :manual)
+  end
+
 end

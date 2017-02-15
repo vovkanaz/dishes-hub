@@ -4,7 +4,7 @@
 <%= form_for :recipes, url: recipes_path, html: { id: "recipes"} do |f| %>
 <p>
 <%= label_tag(:category_id, "Choose Category") %>
-<select name="recipe_categories" >
+<select name="category_id" >
 <% @categories.each do |category|%>
     <option value="<%=category['id']%>"><%=category['title']%> </option>
 <%end%>
