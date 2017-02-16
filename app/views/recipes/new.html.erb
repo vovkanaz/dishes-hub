@@ -1,7 +1,7 @@
 <h1>Create a recipe</h1>
 <div class="row">
      <div class="col s12">
-<%= form_for :recipes, url: recipes_path, html: { id: "recipes"} do |f| %>
+<%= form_for @recipe, url: {action: "create"} do |f| %>
 <p>
 <%= label_tag(:category_id, "Choose Category") %>
 <select name="category_id" >
@@ -20,7 +20,7 @@
 </p>
 
 <p>
-<%= f.submit "Add Recipe",id: "arr" %>
+<%= f.submit "Add Recipe", class: "waves-effect waves-light btn-large" %>
 </p>
 <% end %>
 </div>

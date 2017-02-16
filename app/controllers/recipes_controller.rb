@@ -15,8 +15,8 @@ class RecipesController < ApplicationController
    end
 
   def create
-    byebug
-     @recipe = current_user.recipes.create(recipe_params.merge({category_id: category_id }))
+    @categories = Category.all
+    @recipe = current_user.recipes.create(recipe_params)
      if @recipe.save
        flash[:notice] = "Successfully created recipe."
        redirect_to recipe_path(@recipe.id)
@@ -28,7 +28,7 @@ class RecipesController < ApplicationController
   private
 
   def recipe_params
-  params.require(:recipes).permit(:recipe_categories, :user_id, :name, :manual)
+  params.require(:recipe).permit(:category_id, :user_id, :name, :manual)
   end
 
 end
