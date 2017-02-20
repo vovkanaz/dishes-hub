@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  post '/rate' => 'rater#create', :as => 'rate'
   devise_for :users
   root 'home#index'
   #get 'categories', to: 'category#index'
@@ -7,8 +8,8 @@ Rails.application.routes.draw do
   resources :categories
   resources :recipes
   resources :users
-  # get 'recipes', to: 'recipe#index'
+  get 'home/about', to: 'home#about'
   # post 'recipes', to: 'recipes#new'
-   get 'users/profile', as: 'user_profile'
+  get 'user/:id', to: 'user#show'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

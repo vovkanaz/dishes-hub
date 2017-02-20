@@ -1,3 +1,4 @@
 <% @recipes.each do |recipe| %>
-  <%= link_to recipe.name, recipe_path(recipe) %>
+  <%= link_to recipe.name, recipe_path(recipe) %><br />
+  <i><%= recipe.manual %></i>
 <% end %>

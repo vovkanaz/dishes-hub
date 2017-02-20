@@ -8,8 +8,9 @@
       <b>Left sidebar</b><!-- Grey navigation panel -->
   </div>
   <div class="col s9">
-    <h1><%= @recipe.name %></h1>
 
+    <h1><%= @recipe.name %></h1>
+    Rating  : <%= rating_for @recipe, 'rating' %>
    <p><%= @recipe.manual %></p>
   </div>
 
