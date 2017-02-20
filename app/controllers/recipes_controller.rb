@@ -11,13 +11,17 @@ class RecipesController < ApplicationController
 
   def new
     @categories = Category.all
-    @recipe = current_user.recipes.build
+    #@recipe = current_user.recipes.build
    end
 
   def create
-    byebug
-     @recipe = current_user.recipes.create(recipe_params.merge({category_id: category_id }))
-     if @recipe.save
+    @categories = Category.all
+    puts "____________________________________"
+    puts recipe_params
+    puts "____________________________________"
+    @recipe = Recipe.new(recipe_params)
+    @recipe.save
+    if @recipe.save
        flash[:notice] = "Successfully created recipe."
        redirect_to recipe_path(@recipe.id)
      else
@@ -28,7 +32,7 @@ class RecipesController < ApplicationController
   private
 
   def recipe_params
-  params.require(:recipes).permit(:recipe_categories, :user_id, :name, :manual)
+    params.require(:recipes).permit(:category_id, current_user.id, recipes_attributes: [:name, :manual])
   end
 
 end
